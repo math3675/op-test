@@ -17,7 +17,7 @@ add_action( 'wp_enqueue_scripts', 'bootstrap_enqueue_scripts',1 );
 
 
 // Custom post types
-function create_worker_posttype() {
+function create_medarbejder_posttype() {
     register_post_type( 'medarbejdere',
     array(
       'labels' => array(
@@ -36,7 +36,7 @@ function create_worker_posttype() {
     'taxonomies', array('Afdelinger'),
     );
 }
-add_action( 'init', 'create_worker_posttype' );
+add_action( 'init', 'create_medarbejder_posttype' );
 
 
 
