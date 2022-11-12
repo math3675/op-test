@@ -6,18 +6,26 @@ get_header();
 
 <section class="container medarbejdere">
 
-    <select class="form-select" id="choose-afdeling">
-        <option selected>Alle afdelinger</option>
-        <option type="text" name="afdeling" value="salg">Salg</option>
-    </select>
-
     <?php
     $tax_terms = get_terms( array(
         'taxonomy'   => 'afdelinger',
         'hide_empty' => true, 
     ));
+    ?>
 
-    // Loop afdeling taxonomy
+    <select class="form-select" id="choose-afdeling">
+        <option selected>Alle afdelinger</option>
+    <?php
+    foreach( $tax_terms as $term ) {
+    ?>
+        <option type="text" name="afdeling" value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
+    <?php
+    }
+    ?>
+    </select>
+
+    <?php
+    // display afdelinger
     foreach( $tax_terms as $term ) {
 
         $args = array(
