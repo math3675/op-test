@@ -16,7 +16,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_styles' ,1);
 add_action( 'wp_enqueue_scripts', 'bootstrap_enqueue_scripts',1 ); 
 
 
-// Custom post types
+// Create custom post types
 function create_medarbejder_posttype() {
     register_post_type( 'medarbejdere',
     array(
@@ -40,12 +40,9 @@ add_action( 'init', 'create_medarbejder_posttype' );
 
 
 
-// Taxonomies
+// Create taxonomies
 function create_afdeling_taxonomy() {
   
-    // Add new taxonomy, make it hierarchical like categories
-    //first do the translations part for GUI
-      
       $labels = array(
         'name' => _x( 'Afdelinger', 'taxonomy general name' ),
         'singular_name' => _x( 'Afdeling', 'taxonomy singular name' ),
@@ -60,7 +57,6 @@ function create_afdeling_taxonomy() {
         'menu_name' => __( 'Afdelinger' ),
       );    
       
-    // Now register the taxonomy
       register_taxonomy('afdelinger',array('medarbejdere'), array(
         'hierarchical' => true,
         'labels' => $labels,
