@@ -1,4 +1,5 @@
 $theme-green: #00ba31;
+$theme-dark: rgb(19, 19, 19);
 
 body:not(.overlay-header) .primary-menu > li > a,
 body:not(.overlay-header) .primary-menu > li > .icon,
@@ -78,6 +79,21 @@ p {
       .hide-info {
         display: none;
       }
+    }
+  }
+}
+
+.tilbud {
+  .product {
+    h2 {
+      font-weight: 700;
+    }
+    button {
+      background-color: $theme-dark;
+    }
+    .regular-price {
+      text-decoration: line-through;
+      color: rgb(239, 57, 57);
     }
   }
 }

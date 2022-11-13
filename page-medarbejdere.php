@@ -12,7 +12,7 @@ get_header();
         'hide_empty' => true, 
     ));
     ?>
-
+    
     <select class="form-select" id="choose-afdeling">
         <option selected>Alle afdelinger</option>
     <?php
