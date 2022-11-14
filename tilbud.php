@@ -2,41 +2,69 @@
 
 get_header();
 
+
+if ($_GET["order"] === "price-low") {
+    $selected = 'Pris (lav til høj)';
+    $set_orderby = 'meta_value_num';
+    $set_order = 'ASC';
+} elseif($_GET["order"] === "price-high") {
+    $selected = 'Pris (høj til lav)';
+    $set_orderby = 'meta_value_num';
+    $set_order = 'DESC'; 
+} elseif($_GET["order"] === "newest") {
+    $selected = 'Nyeste tilbud';
+    $set_orderby = 'date';
+    $set_order = 'ASC';
+} else {
+    $selected = 'Sorter produkter';
+    $set_orderby = 'meta_value_num';
+    $set_order = 'ASC';
+}
+
+$category = $_GET['category'];
+
 ?>
+
+<section class="container filters">
+    <div class="row mb-5">
+        <h1><?php the_title() ?></h1>
+    </div>
+    <div class="row">
+        <form class="sort-products d-flex align-items-end" method="get" action="">
+            <div class="col-12 col-sm-6">
+                <h3>Kategorier</h3>
+                <?php
+                    $tax_terms = get_terms( array(
+                        'taxonomy'  => 'product_cat',
+                    ));
+                    
+                    foreach( $tax_terms as $term ) {
+                        ?>
+                            <input type="radio" name="category" <?php if($category === $term->slug) echo "checked"; ?> value="<?php echo $term->slug ?>" onChange="submit()"><?php echo $term->name ?></input>
+                        <?php
+                    }
+                ?>
+                <input type="radio" name="category" value="" <?php if($category == null) echo "checked"; ?> value="<?php echo $term->slug ?>" onChange="submit()">Alle</input> 
+                </div>
+                <div class="col-12 col-sm-6">
+                <select class="form-select" name="order" onChange="submit()">
+                    <option style="display:none" selected><?php echo $selected ?></option>
+                    <option value="price-low">Pris (lav til høj)</option>
+                    <option value="price-high">Pris (høj til lav)</option>
+                    <option value="newest">Nyeste tilbud</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</section>
 
 <section class="container tilbud">
     <div class="row">
-
-    <form method="get">
-    <select class="form-select" aria-label="Default select example" name="order">
-        <option selected value="price-low">Pris (lav til høj)</option>
-        <option value="price-high">Pris (høj til lav)</option>
-        <option value="newest">Nyeste tilbud</option>
-    </select>
-    <button type="submit" class="button">kks</button>
-    </form>
-
     <?php
-
-    $set_orderby = 'meta_value_num';
-    $set_order = 'ASC';
-
-    if ($_GET["order"] === "price-low") {
-        $set_orderby = 'meta_value_num';
-        $set_order = 'ASC'; 
-    } elseif($_GET["order"] === "price-high") {
-        $set_orderby = 'meta_value_num';
-        $set_order = 'DESC'; 
-    } elseif($_GET["order"] === "newest") {
-        $set_orderby = 'date';
-        $set_order = 'ASC';
-    } else {
-        $set_orderby = 'meta_value_num';
-        $set_order = 'ASC';
-    }
 
     $args = array(
         'post_type' => 'product',
+        'product_cat' => $category,
         'orderby'   => $set_orderby,
         'order'     => $set_order,
         'meta_key'  => '_sale_price'
