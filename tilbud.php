@@ -35,6 +35,7 @@ $category = $_GET['category'];
                 <h3>Kategorier</h3>
                 <?php
                     $tax_terms = get_terms( array(
+                        'child_of' => 25,
                         'taxonomy'  => 'product_cat',
                     ));
                     
