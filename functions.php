@@ -15,7 +15,6 @@ function bootstrap_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'enqueue_styles' ,1);
 add_action( 'wp_enqueue_scripts', 'bootstrap_enqueue_scripts',1 ); 
 
-
 // Create custom post types
 function create_medarbejder_posttype() {
     register_post_type( 'medarbejdere',
@@ -37,8 +36,6 @@ function create_medarbejder_posttype() {
     );
 }
 add_action( 'init', 'create_medarbejder_posttype' );
-
-
 
 // Create taxonomies
 function create_afdeling_taxonomy() {
@@ -69,3 +66,24 @@ function create_afdeling_taxonomy() {
 }
 
 add_action( 'init', 'create_afdeling_taxonomy', 0 );
+
+// Read custom template for products in "udlejning" category
+add_filter( 'template_include', 'custom_single_product_template_include', 50, 1 );
+function custom_single_product_template_include( $template ) {
+    if ( is_singular('product') && (has_term( 'udlejning', 'product_cat')) ) {
+        $template = get_stylesheet_directory() . '/woocommerce/single-product-udlejning.php';
+    } 
+    return $template;
+}
+
+// Remove general tab for products in "udlejning" category
+function remove_tab($tabs){
+  if (has_term( array( 'udlejning' ), 'product_cat' )) {
+    unset($tabs['general']);
+  }
+  return($tabs);  
+}
+
+add_filter('woocommerce_product_data_tabs', 'remove_tab', 10, 1);
+
+

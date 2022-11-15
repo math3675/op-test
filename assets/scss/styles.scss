@@ -1,5 +1,6 @@
 $theme-green: #00ba31;
 $theme-dark: rgb(19, 19, 19);
+$theme-grey: #ededed;
 
 body:not(.overlay-header) .primary-menu > li > a,
 body:not(.overlay-header) .primary-menu > li > .icon,
@@ -28,6 +29,12 @@ section {
   padding-bottom: 40px;
 }
 
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+
 p {
   font-size: 16px;
 }
@@ -37,10 +44,6 @@ p {
     background-color: $theme-green;
     height: 100%;
     color: #fff;
-
-    h2 {
-      font-weight: 700;
-    }
   }
   .medarbejder-content {
     position: relative;
@@ -94,6 +97,58 @@ p {
     .regular-price {
       text-decoration: line-through;
       color: rgb(239, 57, 57);
+    }
+  }
+}
+
+.product-content {
+  h1 {
+    font-size: 40px;
+  }
+  .info {
+    background-color: $theme-grey;
+    height: 100%;
+  }
+  .single-price {
+    display: flex;
+    background-color: #fff8f2;
+    justify-content: space-between;
+    padding: 20px 10px;
+    margin: 8px 0 8px 0;
+    p {
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+    .price-number {
+      display: flex;
+      .old-price {
+        margin-right: 20px;
+        text-decoration: line-through;
+        opacity: 0.6;
+        font-weight: 400 !important;
+      }
+    }
+  }
+  button {
+    background-color: $theme-green;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-content {
+    h1 {
+      font-size: 30px;
+    }
+  }
+}
+
+.message {
+  .quote-message {
+    background-color: $theme-green;
+    color: #fff;
+    p {
+      margin-bottom: 0;
     }
   }
 }
