@@ -102,7 +102,6 @@ $category = $_GET['category'];
         <?php
     }
     ?>
-
     </div>
 </section>
 

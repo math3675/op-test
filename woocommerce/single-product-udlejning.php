@@ -3,20 +3,14 @@ get_header();
 
 ?>
 
-
-
 <?php
-
     $terms = get_the_terms($product->ID, 'product_cat');
     
     foreach ($terms as $term) {
         $product_cat = $term->name;
         break;
     }
-
  ?>
-
-
 
 <section class="container product-content">
     <div class="row">
