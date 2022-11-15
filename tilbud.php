@@ -30,8 +30,8 @@ $category = $_GET['category'];
         <h1><?php the_title() ?></h1>
     </div>
     <div class="row">
-        <form class="sort-products d-flex align-items-end" method="get" action="">
-            <div class="col-12 col-sm-6">
+        <form class="sort-products d-md-flex align-items-end" method="get" action="">
+            <div class="col-12 col-sm-8">
                 <h3>Kategorier</h3>
                 <?php
                     $tax_terms = get_terms( array(
@@ -40,13 +40,15 @@ $category = $_GET['category'];
                     
                     foreach( $tax_terms as $term ) {
                         ?>
-                            <input type="radio" name="category" <?php if($category === $term->slug) echo "checked"; ?> value="<?php echo $term->slug ?>" onChange="submit()"><?php echo $term->name ?></input>
+                            <input id="<?php echo $term->slug ?>" type="radio" name="category" <?php if($category === $term->slug) echo "checked"; ?> value="<?php echo $term->slug ?>" onChange="submit()">
+                            <label class="me-3" for="<?php echo $term->slug ?>"><?php echo $term->name ?></label>
                         <?php
                     }
                 ?>
-                <input type="radio" name="category" value="" <?php if($category == null) echo "checked"; ?> value="<?php echo $term->slug ?>" onChange="submit()">Alle</input> 
+                <input type="radio" name="category" id="all-shoes" value="" <?php if($category == null) echo "checked"; ?> value="" onChange="submit()">
+                <label class="me-3" for="all-shoes">Alle</label>
                 </div>
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-4">
                 <select class="form-select" name="order" onChange="submit()">
                     <option style="display:none" selected><?php echo $selected ?></option>
                     <option value="price-low">Pris (lav til høj)</option>
